@@ -1,0 +1,12 @@
+﻿Prueba,Condiciones,Resultado,¿Pasa?,Observación
+P0 Funciones base,"Distancias conocidas, centros y borde de zonas",10/10 casos correctos,PASA,is_valid_position usa 111 km/° (el valor exacto es 111.19 km/°): acepta puntos que están hasta ~0.2 % dentro del borde de cada zona.
+P1 Escenario inicial,"Datos oficiales, semilla 42","5/6 regiones cubiertas, fitness 12.16, 0 invasiones",PASA,Paso = 8 satélites y ninguna invasión (la cobertura se analiza aparte).
+P2 Evolución,Corrida de P1,Mejor 1.25 → 12.16; 95 % de la mejora en gen 32; 2 caídas del mejor,PASA,Sin elitismo: el mejor de cada generación puede perderse (caídas). El mejor global sí se conserva.
+P3 Zonas de desechos,10 corridas + satélite forzado dentro de cada zona,0 invasiones en 10 soluciones; fitness baja al invadir: True,PASA,
+P4 Posiciones ocupadas,10 corridas + objeto C de 2° sobre Yucatán (5 corridas),"0 invasiones a A/B; con objeto C: 0 invasiones, Yucatán cubierta en 5/5",PASA,
+P5 Espacio reducido,"Radios ×2 + zona nueva de 15°, 5 corridas",Disponible 97.3% → 87.3%; válidas 5/5,PASA,
+P6a Condición difícil,"Zona de 5° sobre Yucatán (cobertura imposible), 5 corridas",Yucatán cubierta en 0/5; invasiones 0,PASA,Renuncia a Yucatán: cubrirla ganaría ~2.39 y la invasión cuesta 2.52 (margen muy pequeño).
+P6b Condición inviable,Zona de 180° (sin posiciones válidas),Sin error; devuelve solución con 8 invasiones y fitness -15.92,PASA,"El validador independiente detecta la invalidez, pero generar_individuo rellena con posiciones aleatorias sin avisar. Recomendación: devolver un indicador 'factible' en ejecutar()."
+P7 Variación,"10 semillas, mismos parámetros + repetición de semilla 42",Fitness 11.96 ± 1.87 (CV 15.7%); cobertura 5.4 ± 0.7; reproducible: True,PASA,
+P8 Cambio de condiciones,8a prioridades; 8b zona nueva sobre Sat 1,"8a: anterior sigue válida (True); 8b: anterior inválida (True), reoptimizada válida (True)",PASA,
+P9 Propia: AE vs aleatorio,"3000 evaluaciones, 10 semillas",AE gana en 10/10; fitness medio AE 11.96 vs aleatorio 4.08,PASA,
